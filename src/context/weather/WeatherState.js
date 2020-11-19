@@ -4,10 +4,11 @@ import weatherContext from './WeatherContext';
 import weatherReducer from './weatherReducer';
 // import types
 
-const ContactState = (props) => {
+const WeatherState = (props) => {
   // 1. initial state
   const initialState = {
     location: null,
+    background: null,
     currentWeather: null,
     forecastWeather: null,
     historyWeather: null,
@@ -54,4 +55,4 @@ const ContactState = (props) => {
   );
 };
 
-export default ContactState;
+export default WeatherState;

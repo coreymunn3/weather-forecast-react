@@ -8,8 +8,10 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.0",
     "bulma": "^0.9.1",
+    "dayjs": "^1.9.6",
     "node-sass": "^4.14.1",
     "react": "^17.0.1",
+    "react-dayjs": "^0.2.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.0",
     "web-vitals": "^0.2.4"
