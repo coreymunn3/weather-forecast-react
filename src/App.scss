@@ -10,3 +10,15 @@
 
 // Import only what you need from Bulma
 @import '../node_modules/bulma/bulma.sass';
+
+.App {
+  background-color: #f5f5f5;
+}
+
+.navbar-brand {
+  width: 60px;
+}
+.navbar-brand a {
+  width: 100%;
+  justify-content: center;
+}
