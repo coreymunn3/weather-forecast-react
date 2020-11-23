@@ -17,22 +17,14 @@ const Header = () => {
             <i className='fas fa-cloud-sun fa-2x'></i>
           </span>
         </a>
-
-        <a
-          href='/#'
-          role='button'
-          className='navbar-burger burger is-active'
-          aria-label='menu'
-          aria-expanded='false'
-          data-target='navbarBasicExample'
-        >
-          <span aria-hidden='true'></span>
-          <span aria-hidden='true'></span>
-          <span aria-hidden='true'></span>
-        </a>
+        <span className='navbar-burger burger'>
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
       </div>
 
-      <div id='navbarBasicExample' className='navbar-menu is-active'>
+      <div className='navbar-menu is-active'>
         <div className='navbar-start'>
           <Link className='navbar-item' to='/'>
             Home
