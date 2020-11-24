@@ -5,7 +5,10 @@ import weatherReducer from './weatherReducer';
 
 const WeatherState = (props) => {
   const initialState = {
-    location: 'Washington, DC',
+    location: {
+      name: 'Washington',
+      region: 'District of Columbia',
+    },
     currentWeather: {
       last_updated_epoch: 1606138209,
       last_updated: '2020-11-23 08:30',

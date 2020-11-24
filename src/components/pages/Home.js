@@ -1,12 +1,12 @@
 import React from 'react';
 // components
-import Hero from '../layout/Hero';
-import Forecast from '../layout/Forecast';
+import CurrentWeather from '../currentWeather/CurrentWeather';
+import Forecast from '../forecast/Forecast';
 
 const Home = () => {
   return (
     <div>
-      <Hero />
+      <CurrentWeather />
       <Forecast />
     </div>
   );
