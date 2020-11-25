@@ -10,33 +10,7 @@ const WeatherState = (props) => {
       region: 'District of Columbia',
     },
     currentWeather: {
-      last_updated_epoch: 1606138209,
-      last_updated: '2020-11-23 08:30',
-      temp_c: 13,
-      temp_f: 55.4,
-      is_day: 0,
-      condition: {
-        text: 'Light rain',
-        icon: '//cdn.weatherapi.com/weather/64x64/night/296.png',
-        code: 1183,
-      },
-      wind_mph: 4.3,
-      wind_kph: 6.8,
-      wind_degree: 270,
-      wind_dir: 'W',
-      pressure_mb: 1012,
-      pressure_in: 30.4,
-      precip_mm: 1,
-      precip_in: 0.04,
-      humidity: 88,
-      cloud: 100,
-      feelslike_c: 11.1,
-      feelslike_f: 52,
-      vis_km: 6.4,
-      vis_miles: 3,
-      uv: 1,
-      gust_mph: 21.9,
-      gust_kph: 35.3,
+      temp_f: null,
     },
     forecastWeather: null,
     background: null,
@@ -46,8 +20,36 @@ const WeatherState = (props) => {
 
   const [state, dispatch] = useReducer(weatherReducer, initialState);
 
-  // actions & methods
+  // key
+  const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
+  // actions & methods
+  const setLoading = () => {
+    dispatch({
+      type: 'SET_LOADING',
+    });
+  };
+
+  // get weather from api
+  const getWeather = async (location) => {
+    try {
+      setLoading();
+      const res = await axios.get(
+        `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&days=3`
+      );
+      dispatch({
+        type: 'GET_WEATHER',
+        payload: res.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: 'WEATHER_ERROR',
+        payload: error.message,
+      });
+    }
+  };
+
+  // return the provider
   return (
     <WeatherContext.Provider
       value={{
@@ -57,6 +59,7 @@ const WeatherState = (props) => {
         background: state.background,
         loading: state.loading,
         error: state.error,
+        getWeather,
       }}
     >
       {props.children}

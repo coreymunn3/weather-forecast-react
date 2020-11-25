@@ -1,21 +1,38 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import Skeleton from 'react-loading-skeleton';
 import weatherContext from '../../context/weather/weatherContext';
 // components
 import Settings from '../layout/Settings';
 import SettingsModal from '../layout/SettingsModal';
 
 const CurrentWeather = () => {
+  // global state from context
   const {
     location: { name, region },
     currentWeather: { temp_f, wind_mph, wind_dir, humidity, feelslike_f },
+    loading,
   } = useContext(weatherContext);
 
+  // modal state
   const [modalActive, setModalActive] = useState(false);
+  // storing height of element for skeleton render
+  const [height, setHeight] = useState(0);
 
   const toggleModal = () => {
     setModalActive(!modalActive);
   };
 
+  // get height of element on render
+  useEffect(() => {
+    const skelHeight = document.querySelector('.hero').clientHeight;
+    setHeight(skelHeight);
+  }, []);
+
+  if (loading) {
+    // find height of hero to render proper skeleton
+
+    return <Skeleton height={height + 54} />;
+  }
   return (
     <section className='hero is-primary is-medium is-bold'>
       <Settings toggleModal={toggleModal} />

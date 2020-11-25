@@ -1,12 +1,26 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import DayJS from 'react-dayjs';
+import Skeleton from 'react-loading-skeleton';
 // state
 import weatherContext from '../../context/weather/weatherContext';
 
 const Header = () => {
-  const { currentWeather } = useContext(weatherContext);
+  const { currentWeather, location, loading, getWeather } = useContext(
+    weatherContext
+  );
 
+  useEffect(() => {
+    const cityState = `${location.name} ${location.region}`;
+    const getData = async () => {
+      await getWeather(cityState);
+    };
+    getData();
+  }, []);
+
+  if (loading) {
+    return <Skeleton height={52} />;
+  }
   return (
     <nav
       className='navbar is-dark'
@@ -33,10 +47,9 @@ const Header = () => {
 
         <div className='navbar-end'>
           <div className='navbar-item'>
-            <span>As Of</span>
             <DayJS
               element='span'
-              format='MM-DD-YY HH:MM'
+              format='MM-DD-YY hh:mm A'
               date={currentWeather.last_updated}
             ></DayJS>
           </div>
