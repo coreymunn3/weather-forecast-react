@@ -11,9 +11,9 @@ const Header = () => {
   );
 
   useEffect(() => {
-    const cityState = `${location.name} ${location.region}`;
+    const locationFull = `${location.name} ${location.region}`;
     const getData = async () => {
-      await getWeather(cityState);
+      await getWeather(locationFull);
     };
     getData();
   }, []);

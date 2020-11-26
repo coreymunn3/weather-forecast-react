@@ -13,6 +13,7 @@ const WeatherState = (props) => {
       temp_f: null,
     },
     forecastWeather: null,
+    alert: null,
     background: null,
     loading: false,
     error: null,
@@ -37,6 +38,9 @@ const WeatherState = (props) => {
       const res = await axios.get(
         `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&days=3`
       );
+      console.log(
+        `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&days=3`
+      );
       dispatch({
         type: 'GET_WEATHER',
         payload: res.data,
@@ -49,6 +53,16 @@ const WeatherState = (props) => {
     }
   };
 
+  const setLocation = (city, state) => {
+    dispatch({
+      type: 'SET_LOCATION',
+      payload: {
+        name: city,
+        region: state,
+      },
+    });
+  };
+
   // return the provider
   return (
     <WeatherContext.Provider
@@ -56,10 +70,13 @@ const WeatherState = (props) => {
         location: state.location,
         currentWeather: state.currentWeather,
         forecastWeather: state.forecastWeather,
+        alert: state.alert,
         background: state.background,
         loading: state.loading,
         error: state.error,
+        setLoading,
         getWeather,
+        setLocation,
       }}
     >
       {props.children}

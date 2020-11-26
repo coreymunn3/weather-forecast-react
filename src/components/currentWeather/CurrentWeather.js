@@ -16,7 +16,7 @@ const CurrentWeather = () => {
   // modal state
   const [modalActive, setModalActive] = useState(false);
   // storing height of element for skeleton render
-  const [height, setHeight] = useState(0);
+  const [skelHeight, setSkelHeight] = useState(0);
 
   const toggleModal = () => {
     setModalActive(!modalActive);
@@ -24,14 +24,13 @@ const CurrentWeather = () => {
 
   // get height of element on render
   useEffect(() => {
-    const skelHeight = document.querySelector('.hero').clientHeight;
-    setHeight(skelHeight);
+    const height = document.querySelector('.hero').clientHeight;
+    const TEMP_F_HEIGHT = 54;
+    setSkelHeight(height + TEMP_F_HEIGHT);
   }, []);
 
   if (loading) {
-    // find height of hero to render proper skeleton
-
-    return <Skeleton height={height + 54} />;
+    return <Skeleton height={skelHeight} />;
   }
   return (
     <section className='hero is-primary is-medium is-bold'>
