@@ -4,6 +4,8 @@ import weatherContext from '../../context/weather/weatherContext';
 // components
 import Settings from '../layout/Settings';
 import SettingsModal from '../layout/SettingsModal';
+// styles
+import { weatherHelper, helperItem } from './CurrentWeather.module.scss';
 
 const CurrentWeather = () => {
   // global state from context
@@ -40,32 +42,32 @@ const CurrentWeather = () => {
         <div className='container has-text-centered'>
           <h2 className='subtitle is-3'>{`${name.toUpperCase()}, ${region.toUpperCase()}`}</h2>
           <h1 className='title is-1'>{temp_f}</h1>
-          <h2 className='subtitle'>Degrees Farenheit</h2>
+          <p>Degrees Farenheit</p>
         </div>
       </div>
-      <div className='weather-helper'>
-        <div className='helper-item'>
+      <div className={weatherHelper}>
+        <div className={helperItem}>
           <span className='icon'>
             <i className='fas fa-thermometer-half fa-2x'></i>
           </span>
           <h3>{`${feelslike_f}F`}</h3>
           <p>Real Feel</p>
         </div>
-        <div className='helper-item'>
+        <div className={helperItem}>
           <span className='icon'>
             <i className='fas fa-tint fa-2x'></i>
           </span>
           <h3>{`${humidity}%`}</h3>
           <p>Humidity pct</p>
         </div>
-        <div className='helper-item'>
+        <div className={helperItem}>
           <span className='icon'>
             <i className='fas fa-wind fa-2x'></i>
           </span>
           <h3>{`${wind_mph}`}</h3>
           <p>Wind MPH</p>
         </div>
-        <div className='helper-item'>
+        <div className={helperItem}>
           <span className='icon'>
             <i className='fas fa-compass fa-2x'></i>
           </span>

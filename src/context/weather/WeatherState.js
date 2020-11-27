@@ -12,7 +12,9 @@ const WeatherState = (props) => {
     currentWeather: {
       temp_f: null,
     },
-    forecastWeather: null,
+    forecastWeather: {
+      forecastday: [],
+    },
     alert: null,
     background: null,
     loading: false,

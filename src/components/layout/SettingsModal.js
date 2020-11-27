@@ -21,6 +21,7 @@ const SettingsModal = ({ modalActive, toggleModal }) => {
     // close the modal
     toggleModal(!modalActive);
   };
+
   return (
     <div className={`modal ${modalActive ? 'is-active' : ''}`}>
       <div className='modal-background'></div>

@@ -1,0 +1,28 @@
+.weatherHelper {
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 1.5rem 1rem;
+  width: 70%;
+  height: 150px;
+}
+
+.helperItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 4%;
+  text-align: center;
+  height: 100%;
+
+  h3 {
+    font-size: 120%;
+    font-weight: bold;
+  }
+  p {
+    font-size: 80%;
+  }
+}
