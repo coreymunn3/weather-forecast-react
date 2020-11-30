@@ -7,6 +7,7 @@ import About from './components/pages/About';
 import Header from './components/layout/Header';
 // state
 import WeatherState from './context/weather/WeatherState';
+import ImageState from './context/image/ImageState';
 
 const App = () => {
   return (
@@ -15,7 +16,11 @@ const App = () => {
         <Header />
         <Switch>
           <Route exact path='/about' component={About} />
-          <Route path='/' component={Home} />
+          <Route path='/'>
+            <ImageState>
+              <Home />
+            </ImageState>
+          </Route>
         </Switch>
       </Router>
     </WeatherState>

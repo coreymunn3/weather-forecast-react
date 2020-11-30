@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import DayJS from 'react-dayjs';
+import imageContext from '../../context/image/imageContext';
 // styles
-import {
-  forecastItem,
-  tempHighLow,
-  high,
-  low,
-} from './ForecastItem.module.scss';
+import { forecastItem, tempHighLow } from './ForecastItem.module.scss';
 
 const ForecastItem = ({ forecast: { date, day, hour } }) => {
+  // global state
+  const { forecastWeatherImages } = useContext(imageContext);
+  const imageUrls = forecastWeatherImages[date];
+
   const conditionSummary = `${day.condition.text} with a ${
     day.mintemp_f < 32
       ? day.daily_chance_of_snow +
@@ -22,9 +22,13 @@ const ForecastItem = ({ forecast: { date, day, hour } }) => {
   return (
     <div className={`card ${forecastItem}`}>
       <div className='card-image'>
-        <figure className='image is-4by3'>
+        <figure className='image is-square'>
           <img
-            src='https://bulma.io/images/placeholders/1280x960.png'
+            src={
+              imageUrls
+                ? imageUrls.small
+                : 'https://bulma.io/images/placeholders/480x480.png'
+            }
             alt='Placeholder image'
           />
         </figure>
@@ -35,8 +39,10 @@ const ForecastItem = ({ forecast: { date, day, hour } }) => {
         </p>
         <p>{conditionSummary}</p>
         <div className={tempHighLow}>
-          <p className={high}>{day.maxtemp_f.toFixed(0)}</p>
-          <p className={low}>{day.mintemp_f.toFixed(0)}</p>
+          <p className='has-text-primary has-text-weight-bold'>
+            {day.maxtemp_f.toFixed(0)}
+          </p>
+          <p className='has-text-grey-lighter'>{day.mintemp_f.toFixed(0)}</p>
         </div>
       </div>
     </div>

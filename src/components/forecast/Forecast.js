@@ -1,17 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import weatherContext from '../../context/weather/weatherContext';
+import imageContext from '../../context/image/imageContext';
 // components
 import ForecastItem from './ForecastItem';
 // styles
 import styles from './Forecast.module.scss';
 
 const Forecast = () => {
-  // global state
+  // global weather state
   const {
     forecastWeather: { forecastday },
     loading,
   } = useContext(weatherContext);
+
+  // global image state
+  const { getForecastWeatherImages } = useContext(imageContext);
+
+  // call unsplash API and load forecast images into state
+  useEffect(() => {
+    const getImages = async () => {
+      await getForecastWeatherImages(forecastday);
+    };
+    getImages();
+  }, [forecastday]);
 
   // HOW TO RENDER SKELETON IF ELEMENT DIMENSIONS UNKNOWN?
   // if (loading) {

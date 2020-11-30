@@ -32,7 +32,10 @@ body {
   flex-direction: column;
 
   .card-content {
+    display: flex;
+    flex-direction: column;
     padding: 1rem;
+    justify-content: space-between;
   }
 
   @media screen and(max-width: 650px) {

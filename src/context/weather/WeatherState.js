@@ -10,13 +10,16 @@ const WeatherState = (props) => {
       region: 'District of Columbia',
     },
     currentWeather: {
-      temp_f: null,
+      condition: { code: null },
     },
     forecastWeather: {
       forecastday: [],
     },
     alert: null,
-    background: null,
+    background: {
+      current: null,
+      forecast: [],
+    },
     loading: false,
     error: null,
   };
@@ -24,7 +27,7 @@ const WeatherState = (props) => {
   const [state, dispatch] = useReducer(weatherReducer, initialState);
 
   // key
-  const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+  const WEATHER_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
   // actions & methods
   const setLoading = () => {
@@ -38,10 +41,7 @@ const WeatherState = (props) => {
     try {
       setLoading();
       const res = await axios.get(
-        `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&days=3`
-      );
-      console.log(
-        `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&days=3`
+        `http://api.weatherapi.com/v1/forecast.json?key=${WEATHER_KEY}&q=${location}&days=3`
       );
       dispatch({
         type: 'GET_WEATHER',

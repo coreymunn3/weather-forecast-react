@@ -1,5 +1,5 @@
 .forecastItem {
-  width: 32%;
+  width: 30%;
   margin-bottom: 1rem;
 
   @media screen and(max-width: 650px) {
@@ -9,19 +9,21 @@
 
   p {
     font-size: 80%;
+    text-align: center;
   }
 }
 
 .tempHighLow {
   display: flex;
   justify-content: space-evenly;
-  align-items: center;
-  font-size: 250%;
-}
 
-.high {
-  color: black;
-}
-.low {
-  color: grey;
+  p {
+    font-size: 250%;
+  }
+
+  @media screen and(max-width: 550px) {
+    p {
+      font-size: 200%;
+    }
+  }
 }

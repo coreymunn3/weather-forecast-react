@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import weatherContext from '../../context/weather/weatherContext';
+import imageContext from '../../context/image/imageContext';
 // components
 import Settings from '../layout/Settings';
 import SettingsModal from '../layout/SettingsModal';
@@ -8,22 +9,37 @@ import SettingsModal from '../layout/SettingsModal';
 import { weatherHelper, helperItem } from './CurrentWeather.module.scss';
 
 const CurrentWeather = () => {
-  // global state from context
+  // global weather state from context
   const {
     location: { name, region },
-    currentWeather: { temp_f, wind_mph, wind_dir, humidity, feelslike_f },
+    currentWeather: {
+      temp_f,
+      wind_mph,
+      wind_dir,
+      humidity,
+      feelslike_f,
+      condition,
+    },
     loading,
   } = useContext(weatherContext);
 
+  // global image state from context
+  const { getCurrentWeatherImage } = useContext(imageContext);
+  // get current weather image when condition is updated
+  useEffect(() => {
+    if (condition.code !== null) {
+      getCurrentWeatherImage(condition.code);
+    }
+  }, [condition]);
+
   // modal state
   const [modalActive, setModalActive] = useState(false);
-  // storing height of element for skeleton render
-  const [skelHeight, setSkelHeight] = useState(0);
-
   const toggleModal = () => {
     setModalActive(!modalActive);
   };
 
+  // storing height of element for skeleton render
+  const [skelHeight, setSkelHeight] = useState(0);
   // get height of element on render
   useEffect(() => {
     const height = document.querySelector('.hero').clientHeight;
@@ -35,7 +51,7 @@ const CurrentWeather = () => {
     return <Skeleton height={skelHeight} />;
   }
   return (
-    <section className='hero is-primary is-medium is-bold'>
+    <section className='hero is-primary is-bold'>
       <Settings toggleModal={toggleModal} />
       <SettingsModal modalActive={modalActive} toggleModal={toggleModal} />
       <div className='hero-body'>

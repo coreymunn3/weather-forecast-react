@@ -6,17 +6,7 @@ import Skeleton from 'react-loading-skeleton';
 import weatherContext from '../../context/weather/weatherContext';
 
 const Header = () => {
-  const { currentWeather, location, loading, getWeather } = useContext(
-    weatherContext
-  );
-
-  useEffect(() => {
-    const locationFull = `${location.name} ${location.region}`;
-    const getData = async () => {
-      await getWeather(locationFull);
-    };
-    getData();
-  }, []);
+  const { currentWeather, loading } = useContext(weatherContext);
 
   if (loading) {
     return <Skeleton height={52} />;
