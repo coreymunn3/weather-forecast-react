@@ -6,8 +6,10 @@ import imageReducer from './imageReducer';
 const ImageState = (props) => {
   const initialState = {
     currentWeatherImage: null,
-    forecastWeatherImages: { small: null },
+    // forecastWeatherImages: {},
     error: null,
+    currentLoading: true,
+    // forecastLoading: true,
   };
 
   const [state, dispatch] = useReducer(imageReducer, initialState);
@@ -88,11 +90,24 @@ const ImageState = (props) => {
     }
   };
 
+  const setLoading = (loadingType) => {
+    if (loadingType === 'current') {
+      dispatch({
+        type: 'SET_CURRENT_LOADING',
+      });
+    } else if (loadingType === 'forecast') {
+      dispatch({
+        type: 'SET_FORECAST_LOADING',
+      });
+    }
+  };
+
   const getCurrentWeatherImage = async (conditionCode) => {
     // create URL based on weather conditions
     const collection = findCollection(conditionCode);
     // get image
     try {
+      setLoading('current');
       const res = await axios.get(
         `https://api.unsplash.com/photos/random?client_id=${UNPLASH_KEY}&collections=${collection}`
       );
@@ -109,30 +124,44 @@ const ImageState = (props) => {
   };
 
   // set all forecast images together in one go
-  const getForecastWeatherImages = async (forecastday) => {
+  // const getForecastWeatherImages = async (forecastday) => {
+  //   try {
+  //     setLoading('forecast');
+  //     let imageUrls = {};
+  //     // day in forecastday, find collecton & make request
+  //     forecastday.forEach(async (day) => {
+  //       // build and request URL based on the day code
+  //       const conditionCode = day.day.condition.code;
+  //       const collection = findCollection(conditionCode);
+  //       const res = await axios.get(
+  //         `https://api.unsplash.com/photos/random?client_id=${UNPLASH_KEY}&collections=${collection}`
+  //       );
+  //       // add to dispatch object
+  //       imageUrls[day.date] = res.data.urls;
+  //     });
+  //     // dispatch url object
+  //     dispatch({
+  //       type: 'SET_FORECASTWEATHERIMAGES',
+  //       payload: imageUrls,
+  //     });
+  //   } catch (error) {
+  //     dispatch({
+  //       type: 'IMAGE_ERROR',
+  //       payload: error,
+  //     });
+  //   }
+  // };
+
+  // set single forecast image
+  const getForecastWeatherImage = async (conditionCode) => {
     try {
-      let imageUrls = {};
-      // day in forecastday, find collecton & make request
-      forecastday.forEach(async (day) => {
-        // build and request URL based on the day code
-        const conditionCode = day.day.condition.code;
-        const collection = findCollection(conditionCode);
-        const res = await axios.get(
-          `https://api.unsplash.com/photos/random?client_id=${UNPLASH_KEY}&collections=${collection}`
-        );
-        // add to dispatch object
-        imageUrls[day.date] = res.data.urls;
-      });
-      // dispatch url object
-      dispatch({
-        type: 'SET_FORECASTWEATHERIMAGES',
-        payload: imageUrls,
-      });
+      const collection = findCollection(conditionCode);
+      const res = await axios.get(
+        `https://api.unsplash.com/photos/random?client_id=${UNPLASH_KEY}&collections=${collection}`
+      );
+      return res.data.urls.regular;
     } catch (error) {
-      dispatch({
-        type: 'IMAGE_ERROR',
-        payload: error,
-      });
+      console.error(error);
     }
   };
 
@@ -141,10 +170,12 @@ const ImageState = (props) => {
     <ImageContext.Provider
       value={{
         currentWeatherImage: state.currentWeatherImage,
-        forecastWeatherImages: state.forecastWeatherImages,
+        // forecastWeatherImages: state.forecastWeatherImages,
         error: state.error,
+        currentLoading: state.currentLoading,
+        // forecastLoading: state.forecastLoading,
         getCurrentWeatherImage,
-        getForecastWeatherImages,
+        getForecastWeatherImage,
       }}
     >
       {props.children}

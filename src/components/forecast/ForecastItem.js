@@ -1,14 +1,27 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import DayJS from 'react-dayjs';
+import Skeleton from 'react-loading-skeleton';
 import imageContext from '../../context/image/imageContext';
 // styles
 import { forecastItem, tempHighLow } from './ForecastItem.module.scss';
 
 const ForecastItem = ({ forecast: { date, day, hour } }) => {
   // global state
-  const { forecastWeatherImages } = useContext(imageContext);
-  const imageUrls = forecastWeatherImages[date];
+  const { getForecastWeatherImage } = useContext(imageContext);
+  // local state for image
+  const [backgroundImage, setBackgroundImage] = useState(
+    'https://bulma.io/images/placeholders/480x480.png'
+  );
+
+  // set image on component mount
+  useEffect(() => {
+    const getImage = async () => {
+      const url = await getForecastWeatherImage(day.condition.code);
+      setBackgroundImage(url);
+    };
+    getImage();
+  }, [day]);
 
   const conditionSummary = `${day.condition.text} with a ${
     day.mintemp_f < 32
@@ -19,18 +32,13 @@ const ForecastItem = ({ forecast: { date, day, hour } }) => {
       : day.daily_chance_of_rain + '% chance of rain'
   }`;
 
+  // <Skeleton height={163.5} />
+
   return (
     <div className={`card ${forecastItem}`}>
       <div className='card-image'>
         <figure className='image is-square'>
-          <img
-            src={
-              imageUrls
-                ? imageUrls.small
-                : 'https://bulma.io/images/placeholders/480x480.png'
-            }
-            alt='Placeholder image'
-          />
+          <img src={backgroundImage} alt='Placeholder image' />
         </figure>
       </div>
       <div className='card-content'>
