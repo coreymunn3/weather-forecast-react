@@ -24,7 +24,9 @@ const CurrentWeather = () => {
   } = useContext(weatherContext);
 
   // global image state from context
-  const { getCurrentWeatherImage } = useContext(imageContext);
+  const { getCurrentWeatherImage, currentWeatherImage } = useContext(
+    imageContext
+  );
   // get current weather image when condition is updated
   useEffect(() => {
     if (condition.code !== null) {
@@ -51,9 +53,14 @@ const CurrentWeather = () => {
     return <Skeleton height={skelHeight} />;
   }
   return (
-    <section className='hero is-primary is-bold'>
+    <section className='hero is-primary is-bold has-background'>
       <Settings toggleModal={toggleModal} />
       <SettingsModal modalActive={modalActive} toggleModal={toggleModal} />
+      <img
+        className='hero-background is-transparent'
+        src={currentWeatherImage}
+        alt='image'
+      ></img>
       <div className='hero-body'>
         <div className='container has-text-centered'>
           <h2 className='subtitle is-3'>{`${name.toUpperCase()}, ${region.toUpperCase()}`}</h2>
