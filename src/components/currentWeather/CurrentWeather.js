@@ -53,7 +53,7 @@ const CurrentWeather = () => {
     return <Skeleton height={skelHeight} />;
   }
   return (
-    <section className='hero is-primary is-bold has-background'>
+    <section className='hero is-dark has-background'>
       <Settings toggleModal={toggleModal} />
       <SettingsModal modalActive={modalActive} toggleModal={toggleModal} />
       <img

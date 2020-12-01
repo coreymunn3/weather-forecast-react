@@ -36,7 +36,7 @@ const Header = () => {
         </div>
 
         <div className='navbar-end'>
-          <div className='navbar-item'>
+          <div className='navbar-item has-text-primary'>
             <DayJS
               element='span'
               format='MM-DD-YY hh:mm A'

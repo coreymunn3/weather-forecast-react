@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, Fragment } from 'react';
 // components
 import CurrentWeather from '../currentWeather/CurrentWeather';
 import Forecast from '../forecast/Forecast';
@@ -17,10 +17,10 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <Fragment>
       <CurrentWeather />
       <Forecast />
-    </div>
+    </Fragment>
   );
 };
 

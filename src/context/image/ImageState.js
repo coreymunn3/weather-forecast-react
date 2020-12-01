@@ -6,10 +6,10 @@ import imageReducer from './imageReducer';
 const ImageState = (props) => {
   const initialState = {
     currentWeatherImage: null,
-    // forecastWeatherImages: {},
-    error: null,
     currentLoading: true,
+    // forecastWeatherImages: {},
     // forecastLoading: true,
+    error: null,
   };
 
   const [state, dispatch] = useReducer(imageReducer, initialState);

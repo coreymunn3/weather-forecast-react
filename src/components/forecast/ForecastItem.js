@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import DayJS from 'react-dayjs';
-import Skeleton from 'react-loading-skeleton';
 import imageContext from '../../context/image/imageContext';
 // styles
 import { forecastItem, tempHighLow } from './ForecastItem.module.scss';
 
-const ForecastItem = ({ forecast: { date, day, hour } }) => {
+const ForecastItem = ({ forecast: { date, day, hour }, loading }) => {
   // global state
   const { getForecastWeatherImage } = useContext(imageContext);
   // local state for image
@@ -31,8 +30,6 @@ const ForecastItem = ({ forecast: { date, day, hour } }) => {
         '% chance of rain'
       : day.daily_chance_of_rain + '% chance of rain'
   }`;
-
-  // <Skeleton height={163.5} />
 
   return (
     <div className={`card ${forecastItem}`}>
