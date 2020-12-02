@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import weatherContext from '../../context/weather/weatherContext';
 // components
@@ -11,13 +11,29 @@ const Forecast = () => {
   // global weather state
   const {
     forecastWeather: { forecastday },
-    chartWeather: { visible, date, hours },
+    chartWeather: { visible },
     loading,
   } = useContext(weatherContext);
 
+  // finding the width of the forecast container
+  // via https://usehooks.com/useWindowSize
+  const [forecastWidth, setForecastWidth] = useState(0);
+  useEffect(() => {
+    const handleResize = () => {
+      const forecastContainer = document.getElementById('forecast-container');
+      setForecastWidth(forecastContainer.clientWidth);
+    };
+    // set event listener on window and call function
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <section className='section'>
-      <div className={styles.forecastContainer}>
+      <div id='forecast-container' className={styles.forecastContainer}>
         {/* {loading && (
           TODO: Render 3 skeleton cards
         )} */}
@@ -26,7 +42,7 @@ const Forecast = () => {
             <ForecastItem key={idx} forecast={forecast} />
           ))}
       </div>
-      {visible && <ForecastChart />}
+      {visible && <ForecastChart width={forecastWidth} />}
     </section>
   );
 };

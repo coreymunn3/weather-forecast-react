@@ -14,6 +14,7 @@ const ForecastItem = ({ forecast: { date, day, hour } }) => {
     showChart,
     setChartData,
   } = useContext(weatherContext);
+
   // local state for image
   const [backgroundImage, setBackgroundImage] = useState(
     'https://bulma.io/images/placeholders/480x480.png'
@@ -39,8 +40,6 @@ const ForecastItem = ({ forecast: { date, day, hour } }) => {
 
   // click handler to toggle chart & data displayed
   const handleClick = () => {
-    console.log(`card ${date} clicked`);
-    console.log(hour);
     // push data to chart state
     setChartData(date, hour);
     // show the chart
@@ -61,7 +60,7 @@ const ForecastItem = ({ forecast: { date, day, hour } }) => {
       </div>
       <div className='card-content'>
         <p className='subtitle is-6 has-text-centered'>
-          <DayJS format={'dddd, MMM D'}>{date}</DayJS>
+          <DayJS format={'ddd, MMM D'}>{date}</DayJS>
         </p>
         <p>{conditionSummary}</p>
         <div className={tempHighLow}>
