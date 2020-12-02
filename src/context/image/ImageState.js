@@ -117,8 +117,8 @@ const ImageState = (props) => {
       });
     } catch (error) {
       dispatch({
-        type: 'WEATHER_ERROR',
-        payload: error,
+        type: 'IMAGE_ERROR',
+        payload: error.message,
       });
     }
   };

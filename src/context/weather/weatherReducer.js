@@ -23,6 +23,23 @@ export default (state, action) => {
         ...state,
         error: action.payload,
       };
+    case 'SHOW_CHART':
+      return {
+        ...state,
+        chartWeather: {
+          ...state.chartWeather,
+          visible: true,
+        },
+      };
+    case 'SET_CHART_DATA':
+      return {
+        ...state,
+        chartWeather: {
+          ...state.chartWeather,
+          chartDate: action.payload.date,
+          chartData: action.payload.data,
+        },
+      };
     default:
       return state;
   }

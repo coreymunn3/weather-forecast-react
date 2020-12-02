@@ -1,13 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import DayJS from 'react-dayjs';
+import weatherContext from '../../context/weather/weatherContext';
 import imageContext from '../../context/image/imageContext';
 // styles
 import { forecastItem, tempHighLow } from './ForecastItem.module.scss';
 
-const ForecastItem = ({ forecast: { date, day, hour }, loading }) => {
+const ForecastItem = ({ forecast: { date, day, hour } }) => {
   // global state
   const { getForecastWeatherImage } = useContext(imageContext);
+  const {
+    chartWeather: { chartDate },
+    showChart,
+    setChartData,
+  } = useContext(weatherContext);
   // local state for image
   const [backgroundImage, setBackgroundImage] = useState(
     'https://bulma.io/images/placeholders/480x480.png'
@@ -31,11 +37,26 @@ const ForecastItem = ({ forecast: { date, day, hour }, loading }) => {
       : day.daily_chance_of_rain + '% chance of rain'
   }`;
 
+  // click handler to toggle chart & data displayed
+  const handleClick = () => {
+    console.log(`card ${date} clicked`);
+    console.log(hour);
+    // push data to chart state
+    setChartData(date, hour);
+    // show the chart
+    showChart();
+  };
+
   return (
-    <div className={`card ${forecastItem}`}>
+    <div
+      className={`card ${
+        chartDate === date ? 'card-active' : ''
+      } ${forecastItem}`}
+      onClick={handleClick}
+    >
       <div className='card-image'>
         <figure className='image is-square'>
-          <img src={backgroundImage} alt='Placeholder image' />
+          <img src={backgroundImage} alt='weather' />
         </figure>
       </div>
       <div className='card-content'>

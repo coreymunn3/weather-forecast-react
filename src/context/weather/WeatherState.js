@@ -15,11 +15,12 @@ const WeatherState = (props) => {
     forecastWeather: {
       forecastday: [],
     },
-    alert: null,
-    background: {
-      current: null,
-      forecast: [],
+    chartWeather: {
+      visible: false,
+      chartDate: null,
+      chartData: null,
     },
+    alert: null,
     loading: false,
     error: null,
   };
@@ -65,6 +66,22 @@ const WeatherState = (props) => {
     });
   };
 
+  const showChart = () => {
+    dispatch({
+      type: 'SHOW_CHART',
+    });
+  };
+
+  const setChartData = (date, data) => {
+    dispatch({
+      type: 'SET_CHART_DATA',
+      payload: {
+        date,
+        data,
+      },
+    });
+  };
+
   // return the provider
   return (
     <WeatherContext.Provider
@@ -72,13 +89,15 @@ const WeatherState = (props) => {
         location: state.location,
         currentWeather: state.currentWeather,
         forecastWeather: state.forecastWeather,
+        chartWeather: state.chartWeather,
         alert: state.alert,
-        background: state.background,
         loading: state.loading,
         error: state.error,
         setLoading,
         getWeather,
         setLocation,
+        showChart,
+        setChartData,
       }}
     >
       {props.children}

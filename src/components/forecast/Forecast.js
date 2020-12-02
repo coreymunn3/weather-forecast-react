@@ -1,7 +1,6 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import weatherContext from '../../context/weather/weatherContext';
-// import imageContext from '../../context/image/imageContext';
 // components
 import ForecastItem from './ForecastItem';
 import ForecastChart from './ForecastChart';
@@ -12,19 +11,9 @@ const Forecast = () => {
   // global weather state
   const {
     forecastWeather: { forecastday },
+    chartWeather: { visible, date, hours },
     loading,
   } = useContext(weatherContext);
-
-  // global image state
-  // const { getForecastWeatherImages } = useContext(imageContext);
-
-  // call unsplash API and load forecast images into state
-  // useEffect(() => {
-  //   const getImages = async () => {
-  //     await getForecastWeatherImages(forecastday);
-  //   };
-  //   getImages();
-  // }, [forecastday]);
 
   return (
     <section className='section'>
@@ -34,10 +23,10 @@ const Forecast = () => {
         )} */}
         {!loading &&
           forecastday.map((forecast, idx) => (
-            <ForecastItem forecast={forecast} key={idx} loading={loading} />
+            <ForecastItem key={idx} forecast={forecast} />
           ))}
       </div>
-      <ForecastChart />
+      {visible && <ForecastChart />}
     </section>
   );
 };
