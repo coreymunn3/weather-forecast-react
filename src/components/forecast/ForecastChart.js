@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
+import dayjs from 'dayjs';
 import {
-  ComposedChart,
-  LineChart,
+  BarChart,
   AreaChart,
   Area,
   Bar,
@@ -11,14 +11,17 @@ import {
   Tooltip,
 } from 'recharts';
 import PropTypes from 'prop-types';
+import styles from './ForecastChart.module.scss';
 // context
 import weatherContext from '../../context/weather/weatherContext';
 
 const ForecastChart = ({ width }) => {
   const {
-    chartWeather: { chartData, chartDate },
+    chartWeather: { chartData, chartDate, willRain, willSnow },
+    clearChart,
   } = useContext(weatherContext);
 
+  // transpose data for better labels
   const chartDataAdjusted = chartData.map((hour) => {
     return {
       hour: hour.time.substring(hour.time.length - 5),
@@ -29,40 +32,110 @@ const ForecastChart = ({ width }) => {
     };
   });
 
-  console.log(chartDataAdjusted);
+  // find height based on width
+  const height = width > 650 ? 300 : 200;
+  // create date text for titles
+  const titleDate = dayjs(chartDate).format('dddd');
+  console.log(titleDate);
+  // chart variables
+  const axisStroke = '#c2c2c2';
 
   return (
-    <React.Fragment>
-      {/* <ComposedChart height={150} width={width} data={chartData}>
-        <CartesianGrid stroke='#f5f5f5' />
-        <XAxis dataKey='time' />
-        <YAxis />
-        <Legend />
-        <Area type='monotone' dataKey='temp_f' fill='#333' stroke='#333' />
-        <Bar dataKey='chance_of_rain' fill='#413ea0' />
-      </ComposedChart> */}
-      <AreaChart
-        width={width}
-        height={width > 650 ? 400 : 200}
-        data={chartDataAdjusted}
-      >
-        <defs>
-          <linearGradient id='colorTemps' x1='0' x2='0' y1='0' y2='1'>
-            <stop offset='5%' stopColor='#ffcd45' stopOpacity={0.8} />
-            <stop offset='95%' stopColor='#ffcd45' stopOpacity={0} />
-          </linearGradient>
-        </defs>
-        <XAxis dataKey='hour' interval={3} angle={45} />
-        <CartesianGrid strokeDasharray='1 1' />
-        <Tooltip />
-        <Area
-          type='monotone'
-          dataKey='temp'
-          stroke='#ffcd45'
-          fill='url(#colorTemps)'
-        />
-      </AreaChart>
-    </React.Fragment>
+    <div className={styles.chartsContainer}>
+      <div className={styles.control}>
+        <button className='delete' onClick={() => clearChart()}></button>
+      </div>
+      <div className={styles.chart}>
+        <h2>Temperatures on {titleDate}</h2>
+        <AreaChart width={width} height={height} data={chartDataAdjusted}>
+          <defs>
+            <linearGradient id='colorTemps' x1='0' x2='0' y1='0' y2='1'>
+              <stop offset='5%' stopColor='#ffcd45' stopOpacity={0.8} />
+              <stop offset='95%' stopColor='#ffcd45' stopOpacity={0} />
+            </linearGradient>
+          </defs>
+          <XAxis
+            stroke={axisStroke}
+            dataKey='hour'
+            interval={3}
+            angle={45}
+            height={40}
+            textAnchor='start'
+          />
+          <YAxis
+            stroke={axisStroke}
+            width={40}
+            axisLine={false}
+            tickSize={0}
+            type='number'
+            domain={['dataMin-10', 'dataMax+10']}
+            allowDecimals={false}
+            interval='preserveStartEnd'
+          />
+          <Tooltip />
+          <Area
+            type='monotone'
+            dataKey='temp'
+            stroke='#ffcd45'
+            fill='url(#colorTemps)'
+          />
+        </AreaChart>
+      </div>
+      {willRain && (
+        <div className={styles.chart}>
+          <h2>Rain on {titleDate}</h2>
+          <BarChart width={width} height={height} data={chartDataAdjusted}>
+            <XAxis
+              stroke={axisStroke}
+              dataKey='hour'
+              interval={3}
+              angle={45}
+              height={40}
+              textAnchor='start'
+            />
+            <YAxis
+              stroke={axisStroke}
+              width={40}
+              axisLine={false}
+              tickSize={0}
+              type='number'
+              domain={[0, 100]}
+              allowDecimals={false}
+              interval='preserveStartEnd'
+            />
+            <Tooltip />
+            <Bar dataKey='rainChance' fill='#4792ed' />
+          </BarChart>
+        </div>
+      )}
+      {willSnow && (
+        <div className={styles.chart}>
+          <h2>Snow on {titleDate}</h2>
+          <BarChart width={width} height={height} data={chartDataAdjusted}>
+            <XAxis
+              stroke={axisStroke}
+              dataKey='hour'
+              interval={3}
+              angle={45}
+              height={40}
+              textAnchor='start'
+            />
+            <YAxis
+              stroke={axisStroke}
+              width={40}
+              type='number'
+              axisLine={false}
+              tickSize={0}
+              domain={[0, 100]}
+              allowDecimals={false}
+              interval='preserveStartEnd'
+            />
+            <Tooltip />
+            <Bar dataKey='snowChance' fill='#4792ed' />
+          </BarChart>
+        </div>
+      )}
+    </div>
   );
 };
 

@@ -1,0 +1,24 @@
+.chartsContainer {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  position: relative;
+
+  .control {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.25rem;
+  }
+  .chart {
+    padding: 0.5rem 0;
+    margin-bottom: 1rem;
+
+    h2 {
+      font-size: 120%;
+      margin-left: 40px;
+    }
+  }
+}

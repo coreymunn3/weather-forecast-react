@@ -31,6 +31,18 @@ export default (state, action) => {
           visible: true,
         },
       };
+    case 'CLEAR_CHART':
+      return {
+        ...state,
+        chartWeather: {
+          ...state.chartWeather,
+          visible: false,
+          chartDate: null,
+          chartData: null,
+          willRain: 0,
+          willSnow: 0,
+        },
+      };
     case 'SET_CHART_DATA':
       return {
         ...state,
@@ -38,6 +50,8 @@ export default (state, action) => {
           ...state.chartWeather,
           chartDate: action.payload.date,
           chartData: action.payload.data,
+          willRain: action.payload.willRain,
+          willSnow: action.payload.willSnow,
         },
       };
     default:

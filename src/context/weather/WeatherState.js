@@ -19,6 +19,8 @@ const WeatherState = (props) => {
       visible: false,
       chartDate: null,
       chartData: null,
+      willRain: null,
+      willSnow: null,
     },
     alert: null,
     loading: false,
@@ -72,12 +74,20 @@ const WeatherState = (props) => {
     });
   };
 
-  const setChartData = (date, data) => {
+  const clearChart = () => {
+    dispatch({
+      type: 'CLEAR_CHART',
+    });
+  };
+
+  const setChartData = (date, data, willRain, willSnow) => {
     dispatch({
       type: 'SET_CHART_DATA',
       payload: {
         date,
         data,
+        willRain: willRain === 0 ? false : true,
+        willSnow: willSnow === 0 ? false : true,
       },
     });
   };
@@ -97,6 +107,7 @@ const WeatherState = (props) => {
         getWeather,
         setLocation,
         showChart,
+        clearChart,
         setChartData,
       }}
     >
