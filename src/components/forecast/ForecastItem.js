@@ -41,7 +41,12 @@ const ForecastItem = ({ forecast: { date, day, hour } }) => {
   // click handler to toggle chart & data displayed
   const handleClick = () => {
     // push data to chart state
-    setChartData(date, hour, day.daily_will_it_rain, day.daily_will_it_snow);
+    setChartData(
+      date,
+      hour,
+      day.daily_chance_of_rain,
+      day.daily_chance_of_snow
+    );
     // show the chart
     showChart();
   };

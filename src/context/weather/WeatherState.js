@@ -19,8 +19,8 @@ const WeatherState = (props) => {
       visible: false,
       chartDate: null,
       chartData: null,
-      willRain: null,
-      willSnow: null,
+      chanceRain: null,
+      chanceSnow: null,
     },
     alert: null,
     loading: false,
@@ -80,14 +80,14 @@ const WeatherState = (props) => {
     });
   };
 
-  const setChartData = (date, data, willRain, willSnow) => {
+  const setChartData = (date, data, chanceRain, chanceSnow) => {
     dispatch({
       type: 'SET_CHART_DATA',
       payload: {
         date,
         data,
-        willRain: willRain === 0 ? false : true,
-        willSnow: willSnow === 0 ? false : true,
+        chanceRain: parseInt(chanceRain) > 0 ? true : false,
+        chanceSnow: parseInt(chanceSnow) > 0 ? true : false,
       },
     });
   };

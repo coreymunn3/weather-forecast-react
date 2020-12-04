@@ -39,8 +39,8 @@ export default (state, action) => {
           visible: false,
           chartDate: null,
           chartData: null,
-          willRain: 0,
-          willSnow: 0,
+          chanceRain: 0,
+          chanceSnow: 0,
         },
       };
     case 'SET_CHART_DATA':
@@ -50,8 +50,8 @@ export default (state, action) => {
           ...state.chartWeather,
           chartDate: action.payload.date,
           chartData: action.payload.data,
-          willRain: action.payload.willRain,
-          willSnow: action.payload.willSnow,
+          chanceRain: action.payload.chanceRain,
+          chanceSnow: action.payload.chanceSnow,
         },
       };
     default:
