@@ -25,11 +25,8 @@ const Header = () => {
         </a>
       </div>
 
-      <div className='navbar-menu is-active'>
+      <div className='navbar-menu'>
         <div className='navbar-start'>
-          <Link className='navbar-item' to='/'>
-            Home
-          </Link>
           <Link className='navbar-item' to='/about'>
             About
           </Link>
@@ -39,7 +36,7 @@ const Header = () => {
           <div className='navbar-item has-text-primary'>
             <DayJS
               element='span'
-              format='MM-DD-YY hh:mm A'
+              format='hh:mm A'
               date={currentWeather.last_updated}
             ></DayJS>
           </div>

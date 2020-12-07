@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, Fragment } from 'react';
 // components
+import WeatherAlert from '../currentWeather/WeatherAlert';
 import CurrentWeather from '../currentWeather/CurrentWeather';
 import Forecast from '../forecast/Forecast';
 // state
@@ -18,6 +19,7 @@ const Home = () => {
 
   return (
     <Fragment>
+      <WeatherAlert />
       <CurrentWeather />
       <Forecast />
     </Fragment>

@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
+// global state
 import weatherContext from '../../context/weather/weatherContext';
 import imageContext from '../../context/image/imageContext';
 // components

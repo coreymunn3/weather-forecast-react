@@ -36,7 +36,7 @@ const ForecastChart = ({ width }) => {
     };
   });
   // find height based on width
-  const height = width > 650 ? 300 : 200;
+  const height = width > 850 ? 300 : 200;
   // find current hour for reference line
   const thisHour = dayjs(new Date()).format('HH:00');
   // determine if chart date is current day

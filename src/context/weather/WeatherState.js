@@ -22,7 +22,10 @@ const WeatherState = (props) => {
       chanceRain: null,
       chanceSnow: null,
     },
-    alert: null,
+    alert: {
+      event: null,
+      expires: null,
+    },
     loading: false,
     error: null,
   };
