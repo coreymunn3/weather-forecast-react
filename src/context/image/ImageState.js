@@ -27,7 +27,7 @@ const ImageState = (props) => {
       // partly cloudy
       case 1003:
         return 58866475;
-      // overcase, cloudy
+      // overcast, cloudy
       case 1006:
       case 1009:
         return 65178082;

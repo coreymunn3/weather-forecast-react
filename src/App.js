@@ -5,6 +5,7 @@ import './App.scss';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
 import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
 // state
 import WeatherState from './context/weather/WeatherState';
 import ImageState from './context/image/ImageState';
@@ -22,6 +23,7 @@ const App = () => {
             </ImageState>
           </Route>
         </Switch>
+        <Footer />
       </Router>
     </WeatherState>
   );

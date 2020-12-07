@@ -17,7 +17,9 @@ const Forecast = () => {
 
   // finding the width of the forecast container
   // via https://usehooks.com/useWindowSize
+  const FORECAST_HEIGHT = 163.5; // height will always be this on mobile screens
   const [forecastWidth, setForecastWidth] = useState(0);
+
   useEffect(() => {
     const handleResize = () => {
       const forecastContainer = document.getElementById('forecast-container');
@@ -34,9 +36,16 @@ const Forecast = () => {
   return (
     <section className='section'>
       <div id='forecast-container' className={styles.forecastContainer}>
-        {/* {loading && (
-          TODO: Render 3 skeleton cards
-        )} */}
+        {loading &&
+          forecastWidth < 650 &&
+          forecastday.map((forecast, idx) => (
+            <Skeleton
+              height={163.5}
+              width={forecastWidth}
+              style={{ marginBottom: '1rem' }}
+              key={idx}
+            />
+          ))}
         {!loading &&
           forecastday.map((forecast, idx) => (
             <ForecastItem key={idx} forecast={forecast} />

@@ -20,6 +20,7 @@ const CurrentWeather = () => {
       humidity,
       feelslike_f,
       condition,
+      cloud,
     },
     loading,
   } = useContext(weatherContext);
@@ -83,6 +84,13 @@ const CurrentWeather = () => {
           </span>
           <h3>{`${humidity}%`}</h3>
           <p>Humidity pct</p>
+        </div>
+        <div className={helperItem}>
+          <span className='icon'>
+            <i className='fas fa-cloud fa-2x'></i>
+          </span>
+          <h3>{`${cloud}%`}</h3>
+          <p>Cloud cover</p>
         </div>
         <div className={helperItem}>
           <span className='icon'>
