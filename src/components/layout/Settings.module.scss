@@ -5,4 +5,10 @@
   padding: 0.5rem;
   cursor: pointer;
   z-index: 39;
+
+  span {
+    i {
+      text-shadow: 0 0 3px #000;
+    }
+  }
 }

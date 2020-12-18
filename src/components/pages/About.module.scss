@@ -1,0 +1,23 @@
+.about {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  column-gap: 1rem;
+
+  @media screen and (min-width: 650px) {
+    grid-template-columns: 1fr;
+    row-gap: 1rem;
+  }
+
+  .aboutLeft {
+    max-width: 300px;
+    @media screen and (min-width: 650px) {
+    }
+  }
+  .aboutRight {
+    align-self: flex-start;
+    @media screen and (min-width: 650px) {
+      width: 30%;
+      text-align: center;
+    }
+  }
+}

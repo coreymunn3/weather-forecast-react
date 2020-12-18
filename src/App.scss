@@ -1,11 +1,14 @@
 @charset "utf-8";
 
 // Import a Google Font
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
 // Set your brand colors
-
+$blue: #1c9cf6;
+$yellow: #ffcd00;
 // Update Bulma's global variables
-
+$primary: $blue;
+$warning: $yellow;
 // Update some of Bulma's component variables
 $navbar-breakpoint: 300px;
 $modal-breakpoint: 300px;
@@ -17,6 +20,7 @@ $footer-padding: 2rem 1.5rem;
 html,
 body {
   overflow-x: hidden;
+  font-family: 'Nunito', sans-serif;
 }
 
 .navbar-brand .navbar-item {
@@ -80,4 +84,8 @@ body {
 
 .card-active {
   border: 2px solid $primary;
+}
+
+.figure {
+  margin: 0;
 }

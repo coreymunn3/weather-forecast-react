@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, Fragment } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import weatherContext from '../../context/weather/weatherContext';
 // components
@@ -36,16 +36,28 @@ const Forecast = () => {
   return (
     <section className='section'>
       <div id='forecast-container' className={styles.forecastContainer}>
-        {loading &&
-          forecastWidth < 650 &&
-          forecastday.map((forecast, idx) => (
+        {loading && forecastWidth < 650 && (
+          <Fragment>
             <Skeleton
               height={163.5}
               width={forecastWidth}
               style={{ marginBottom: '1rem' }}
-              key={idx}
+              key='1'
             />
-          ))}
+            <Skeleton
+              height={163.5}
+              width={forecastWidth}
+              style={{ marginBottom: '1rem' }}
+              key='2'
+            />
+            <Skeleton
+              height={163.5}
+              width={forecastWidth}
+              style={{ marginBottom: '1rem' }}
+              key='3'
+            />
+          </Fragment>
+        )}
         {!loading &&
           forecastday.map((forecast, idx) => (
             <ForecastItem key={idx} forecast={forecast} />

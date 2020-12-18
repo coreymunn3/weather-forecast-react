@@ -72,7 +72,7 @@ const ForecastItem = ({ forecast: { date, day, hour } }) => {
           <p className='has-text-primary has-text-weight-bold'>
             {day.maxtemp_f.toFixed(0)}
           </p>
-          <p className='has-text-grey-lighter'>{day.mintemp_f.toFixed(0)}</p>
+          <p className='has-text-grey-light'>{day.mintemp_f.toFixed(0)}</p>
         </div>
       </div>
     </div>
