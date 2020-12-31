@@ -45,9 +45,11 @@ const ForecastChart = ({ width }) => {
   const titleDate = dayjs(chartDate).format('dddd');
   // colors
   const axisStroke = '#c2c2c2';
-  const referenceStroke = '#333';
+  const referenceLineColor = '#333';
   const tempColor = '#ffcd45';
   const feelsLikeColor = '#333';
+  const rainFill = '#4792ed';
+  const snowFill = '#90bdf4';
 
   return (
     <div className={styles.chartsContainer}>
@@ -89,7 +91,7 @@ const ForecastChart = ({ width }) => {
           {isToday && (
             <ReferenceLine
               x={thisHour}
-              stroke={referenceStroke}
+              stroke={referenceLineColor}
               strokeWidth={2}
             >
               <Label value='Now' position='insideTopLeft'></Label>
@@ -136,14 +138,14 @@ const ForecastChart = ({ width }) => {
             {isToday && (
               <ReferenceLine
                 x={thisHour}
-                stroke={referenceStroke}
+                stroke={referenceLineColor}
                 strokeWidth={2}
               >
                 <Label value='Now' position='insideTopLeft'></Label>
               </ReferenceLine>
             )}
             <Tooltip />
-            <Bar dataKey='rain chance' fill='#4792ed' />
+            <Bar dataKey='rain chance' fill={rainFill} />
           </BarChart>
         </div>
       )}
@@ -172,14 +174,14 @@ const ForecastChart = ({ width }) => {
             {isToday && (
               <ReferenceLine
                 x={thisHour}
-                stroke={referenceStroke}
+                stroke={referenceLineColor}
                 strokeWidth={2}
               >
                 <Label value='Now' position='insideTopLeft'></Label>
               </ReferenceLine>
             )}
             <Tooltip />
-            <Bar dataKey='snow chance' fill='#4792ed' />
+            <Bar dataKey='snow chance' fill={snowFill} />
           </BarChart>
         </div>
       )}

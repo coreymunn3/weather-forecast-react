@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useState, Fragment } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+  useRef,
+  Fragment,
+} from 'react';
 import Skeleton from 'react-loading-skeleton';
 import weatherContext from '../../context/weather/weatherContext';
 // components
@@ -17,7 +23,6 @@ const Forecast = () => {
 
   // finding the width of the forecast container
   // via https://usehooks.com/useWindowSize
-  const FORECAST_HEIGHT = 163.5; // height will always be this on mobile screens
   const [forecastWidth, setForecastWidth] = useState(0);
 
   useEffect(() => {
@@ -32,6 +37,13 @@ const Forecast = () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  // scroll to end when forecast day clicked
+  // from: https://stackoverflow.com/questions/37620694/how-to-scroll-to-bottom-in-react
+  const lastEl = useRef(null);
+  useEffect(() => {
+    if (visible) lastEl.current.scrollIntoView({ behavior: 'smooth' });
+  }, [visible]);
 
   return (
     <section className='section'>
@@ -64,6 +76,7 @@ const Forecast = () => {
           ))}
       </div>
       {visible && <ForecastChart width={forecastWidth} />}
+      <div ref={lastEl}></div>
     </section>
   );
 };

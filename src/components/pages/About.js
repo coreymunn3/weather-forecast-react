@@ -18,25 +18,18 @@ const About = () => {
         <h5 className='subtitle is-4 has-text-bold'>Layout</h5>
         <p className='block'>
           The Navbar contains 3 items. The icon to the far left indicates
-          current weather conditions at your location, and (somewhat) the time
-          of day. This icon also functions as the "home" button. The "about"
-          link takes you to this page. The time displayed in the top right
-          indicates the most recent time the applicaiton data was updated, which
-          occurs every 15 minutes.
+          current weather conditions at your location. This icon also functions
+          as the "home" button. The time displayed in the top right indicates
+          the most recent time the applicaiton data was updated, which occurs
+          every 15 minutes.
         </p>
         <p className='block'>
           Below the Navbar, weather alerts that may exist for your chosen
           location are shown in a yellow banner. Clicking the banner will
           provide more information about the alert in a modal popup that can be
-          exited using the "x" in the top right.
-        </p>
-        <p className='block'>
-          The main display includes large text showing the current location and
-          current weather at that location, along with helper indicators on the
-          bottom of this container. The backgroung image also serves to indicate
-          the current weather. Finally, the forecasts for the current day and
-          the next two days follow, and will bring up a graph when clicked (see
-          how to use).
+          exited using the "x" in the top right. Finally, the forecasts for the
+          current day and the next two days follow, and will bring up a graph
+          when clicked (see how to use).
         </p>
       </div>
       <div className='block'>
@@ -74,8 +67,8 @@ const About = () => {
           </div>
           <div className={styles.aboutRight}>
             <p>
-              <strong>Corey Munn</strong> Is a developer from Washington, DC
-              with experience with React and Tableau.
+              <strong>Corey Munn</strong> Is a developer from Washington, DC and
+              has experience with React and Tableau.
             </p>
           </div>
         </div>

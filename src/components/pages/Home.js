@@ -17,6 +17,15 @@ const Home = () => {
     getData();
   }, []);
 
+  useEffect(() => {
+    if ('geolocation' in navigator) {
+      console.log('Available');
+      navigator.geolocation.getCurrentPosition((pos) => console.log(pos));
+    } else {
+      console.log('Not Available');
+    }
+  }, []);
+
   return (
     <Fragment>
       <WeatherAlert />
