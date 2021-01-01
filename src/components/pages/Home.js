@@ -33,14 +33,12 @@ const Home = () => {
             pos.coords.latitude,
             pos.coords.longitude
           );
-        });
-        // after a few seconds, notify user of success
-        setTimeout(() => {
+          // after a few seconds, notify user of success
           addToast('Location Updated Automatically', {
             appearance: 'success',
             autoDismiss: true,
           });
-        }, 3000);
+        });
       } else {
         // notify user of auto-location update failure
         addToast('Location Unavailable, please set manually', {
