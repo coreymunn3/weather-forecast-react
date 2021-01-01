@@ -1,0 +1,11 @@
+export const SET_LOADING = 'SET_LOADING';
+export const GET_WEATHER = 'GET_WEATHER';
+export const WEATHER_ERROR = 'WEATHER_ERROR';
+export const SET_LOCATION = 'SET_LOCATION';
+export const SET_LAT_LON = 'SET_LAT_LON';
+export const SHOW_CHART = 'SHOW_CHART';
+export const CLEAR_CHART = 'CLEAR_CHART';
+export const SET_CHART_DATA = 'SET_CHART_DATA';
+export const SET_CURRENT_LOADING = 'SET_CURRENT_LOADING';
+export const SET_CURRENTWEATHERIMAGE = 'SET_CURRENTWEATHERIMAGE';
+export const IMAGE_ERROR = 'IMAGE_ERROR';

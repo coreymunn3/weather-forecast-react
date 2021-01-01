@@ -1,5 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { ToastProvider } from 'react-toast-notifications';
+// css
 import './App.scss';
 // components
 import Home from './components/pages/Home';
@@ -13,18 +15,20 @@ import ImageState from './context/image/ImageState';
 const App = () => {
   return (
     <WeatherState>
-      <Router>
-        <Header />
-        <Switch>
-          <Route exact path='/about' component={About} />
-          <Route path='/'>
-            <ImageState>
-              <Home />
-            </ImageState>
-          </Route>
-        </Switch>
-        <Footer />
-      </Router>
+      <ToastProvider>
+        <Router>
+          <Header />
+          <Switch>
+            <Route exact path='/about' component={About} />
+            <Route path='/'>
+              <ImageState>
+                <Home />
+              </ImageState>
+            </Route>
+          </Switch>
+          <Footer />
+        </Router>
+      </ToastProvider>
     </WeatherState>
   );
 };

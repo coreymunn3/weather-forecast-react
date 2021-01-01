@@ -4,7 +4,9 @@ import weatherContext from '../../context/weather/weatherContext';
 const SettingsModal = ({ modalActive, toggleModal }) => {
   // global state
   const {
-    location: { name, region },
+    location: {
+      citystate: { name, region },
+    },
     setLocation,
     getWeather,
   } = useContext(weatherContext);
@@ -15,9 +17,6 @@ const SettingsModal = ({ modalActive, toggleModal }) => {
   const handleSubmit = async () => {
     // set new location
     setLocation(city, state);
-    // pull weather data for new location
-    const locationFull = `${city} ${state}`;
-    await getWeather(locationFull);
     // close the modal
     toggleModal(!modalActive);
   };
@@ -66,23 +65,6 @@ const SettingsModal = ({ modalActive, toggleModal }) => {
                 </div>
               </div>
             </div>
-            {/* <div className='field is-horizontal'>
-              <div className='field-label is-small'>
-                <label className='label'>Measurements</label>
-              </div>
-              <div className='field-body'>
-                <div className='field is-narrow'>
-                  <p className='control'>
-                    <label className='radio'>
-                      <input type='radio' name='measurement' /> Imperial
-                    </label>
-                    <label className='radio'>
-                      <input type='radio' name='measurement' /> Metric
-                    </label>
-                  </p>
-                </div>
-              </div>
-            </div> */}
             <div className='field is-horizontal'>
               <div className='field-label is-small'></div>
               <div className='field-body'>

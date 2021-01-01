@@ -66,10 +66,11 @@ body {
 
   @media screen and(max-width: 650px) {
     flex-direction: row;
-    max-height: 163.5px;
+    // max-height: 163.5px;
 
     .card-image {
       width: 50%;
+      height: 100%;
     }
     .card-content {
       width: 50%;

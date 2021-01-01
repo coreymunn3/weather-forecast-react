@@ -27,6 +27,7 @@ const ForecastItem = ({ forecast: { date, day, hour } }) => {
       setBackgroundImage(url);
     };
     getImage();
+    // eslint-disable-next-line
   }, [day]);
 
   const conditionSummary = `${day.condition.text} with a ${

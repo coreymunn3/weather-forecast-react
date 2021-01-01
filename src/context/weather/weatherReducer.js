@@ -1,6 +1,17 @@
+import {
+  SET_LOADING,
+  GET_WEATHER,
+  WEATHER_ERROR,
+  SET_LOCATION,
+  SET_LAT_LON,
+  SHOW_CHART,
+  CLEAR_CHART,
+  SET_CHART_DATA,
+} from '../types.js';
+
 export default (state, action) => {
   switch (action.type) {
-    case 'GET_WEATHER':
+    case GET_WEATHER:
       return {
         ...state,
         currentWeather: action.payload.current,
@@ -8,22 +19,33 @@ export default (state, action) => {
         alert: action.payload.alert,
         loading: false,
       };
-    case 'SET_LOADING':
+    case SET_LOADING:
       return {
         ...state,
         loading: true,
       };
-    case 'SET_LOCATION':
+    case SET_LOCATION:
       return {
         ...state,
-        location: action.payload,
+        location: {
+          ...state.location,
+          citystate: action.payload,
+        },
       };
-    case 'WEATHER_ERROR':
+    case SET_LAT_LON:
+      return {
+        ...state,
+        location: {
+          ...state.location,
+          latlon: action.payload,
+        },
+      };
+    case WEATHER_ERROR:
       return {
         ...state,
         error: action.payload,
       };
-    case 'SHOW_CHART':
+    case SHOW_CHART:
       return {
         ...state,
         chartWeather: {
@@ -31,7 +53,7 @@ export default (state, action) => {
           visible: true,
         },
       };
-    case 'CLEAR_CHART':
+    case CLEAR_CHART:
       return {
         ...state,
         chartWeather: {
@@ -43,7 +65,7 @@ export default (state, action) => {
           chanceSnow: 0,
         },
       };
-    case 'SET_CHART_DATA':
+    case SET_CHART_DATA:
       return {
         ...state,
         chartWeather: {

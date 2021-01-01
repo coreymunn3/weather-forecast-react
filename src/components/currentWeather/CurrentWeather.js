@@ -12,7 +12,7 @@ import { weatherHelper, helperItem } from './CurrentWeather.module.scss';
 const CurrentWeather = () => {
   // global weather state from context
   const {
-    location: { name, region },
+    location: { citystate },
     currentWeather: {
       temp_f,
       wind_mph,
@@ -65,7 +65,7 @@ const CurrentWeather = () => {
       ></img>
       <div className='hero-body'>
         <div className='container has-text-centered'>
-          <h2 className='subtitle is-3'>{`${name.toUpperCase()}, ${region.toUpperCase()}`}</h2>
+          <h2 className='subtitle is-3'>{`${citystate.name.toUpperCase()}, ${citystate.region.toUpperCase()}`}</h2>
           <h1 className='title is-1'>{temp_f}</h1>
           <p>Degrees Farenheit</p>
         </div>
