@@ -16,7 +16,7 @@ export default (state, action) => {
         ...state,
         currentWeather: action.payload.current,
         forecastWeather: action.payload.forecast,
-        alert: action.payload.alert,
+        alert: action.payload.alerts,
         loading: false,
       };
     case SET_LOADING:

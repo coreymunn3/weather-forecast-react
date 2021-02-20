@@ -38,10 +38,7 @@ const WeatherState = (props) => {
       chanceRain: null,
       chanceSnow: null,
     },
-    alert: {
-      event: null,
-      expires: null,
-    },
+    alert: {},
     loading: false,
     error: null,
   };

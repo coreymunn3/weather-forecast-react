@@ -8,7 +8,7 @@ const Footer = () => {
       <div className='content has-text-centered'>
         <p>
           {'Forecaster created by '}
-          <strong>Corey Munn</strong> &copy; 2020
+          <strong>Corey</strong> &copy; 2021
         </p>
         {location.pathname === '/' && <Link to='/about'>About this App</Link>}
         <p>

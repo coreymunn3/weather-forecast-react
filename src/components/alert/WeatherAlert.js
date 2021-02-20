@@ -10,7 +10,7 @@ import styles from './WeatherAlert.module.scss';
 
 const WeatherAlert = () => {
   const { alert, loading } = useContext(weatherContext);
-  const alertIsEmpty = Object.keys(alert).length === 0;
+  const alertIsEmpty = alert.alert.length === 0;
 
   // local state to manage modal
   const [modalActive, setModalActive] = useState(false);
@@ -19,7 +19,7 @@ const WeatherAlert = () => {
     setModalActive(!modalActive);
   };
 
-  if (!alertIsEmpty && loading) {
+  if (loading) {
     return <Skeleton height={35} />;
   }
   return (

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, Fragment } from 'react';
 import { useToasts } from 'react-toast-notifications';
 // components
-import WeatherAlert from '../alert/WeatherAlert';
+//import WeatherAlert from '../alert/WeatherAlert'; - defunct due to api change
 import CurrentWeather from '../currentWeather/CurrentWeather';
 import Forecast from '../forecast/Forecast';
 // state
@@ -61,7 +61,7 @@ const Home = () => {
 
   return (
     <Fragment>
-      <WeatherAlert />
+      {/* <WeatherAlert /> */}
       <CurrentWeather />
       <Forecast />
     </Fragment>
